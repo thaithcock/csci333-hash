@@ -1,6 +1,5 @@
 #include "Hash.h"
 #include <iostream>
-#include <assert.h>
 
 using std::string;
 using std::list;
@@ -17,14 +16,19 @@ Hash<V>::~Hash() {
 }
 
 template <typename V>
-void Hash<V>::insert(Entry<V>* entry) {
- table[hash(entry->getKey())]->push_back(*entry);
+
+//void Hash<V>::insert(Entry<V>* entry) {
+// table[hash(entry->getKey())].push_back(*entry);
+//}
+
+void Hash<V>::insert(string key, V v) {
+ table[hash(key)].push_back(Entry<V>(key,v));
 }
 
 template <typename V>
 V Hash<V>::get(string key) {
  int hashed = hash(key);
- if(table[hashed]!=0) { // If the spot in the table is not empty...
+ if(!table[hashed].empty()) { // If the spot in the table is not empty...
   typename list< Entry<V> >::iterator it;
   for(it = table[hashed].begin(); it != table[hashed].end(); it++) {
    if(it->getKey() == key) // And the key is the same...
@@ -37,7 +41,7 @@ V Hash<V>::get(string key) {
 template <typename V>
 int Hash<V>::hash(string key) {
  int value = 0;
- for(int i = 0; i < key.length(); i++) {
+ for(int i = 0; i < (int)key.length(); i++) {
   value += key[i];
  }
  value = value%height;
