@@ -3,17 +3,21 @@
 
 #include "Entry.h"
 #include <string>
+#include <list>
 using std::string;
+using std::list;
 
 template <typename V>
 class Hash {
  private:
-  
-  
+  int height;
+  list< Entry<V> >* table;
+  int hash(string key);
  public:
-  Hash<V>();
-  Hash<V>::~Hash();
-  void hash(Entry<V> entry);
+  Hash<V>(int size = 32);
+  ~Hash();
+  void insert(Entry<V>* entry);
+  V get(string key);
 };
 
 #endif
