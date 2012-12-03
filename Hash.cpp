@@ -16,25 +16,35 @@ Hash<V>::~Hash() {
 }
 
 template <typename V>
-
-//void Hash<V>::insert(Entry<V>* entry) {
-// table[hash(entry->getKey())].push_back(*entry);
-//}
-
 void Hash<V>::insert(string key, V v) {
- table[hash(key)].push_back(Entry<V>(key,v));
+ if(table[hash(key)].empty()) //empty spot
+  table[hash(key)].push_back(Entry<V>(key,v));
+ else{ //non-empty spot
+  typename list< Entry<V> >::iterator it;
+  bool inserted = false;
+  for(it = table[hash(key)].begin(); it != table[hash(key)].end() && inserted == false; it++) {
+   if(it->getKey() == key){
+    it->setValue(v);
+    inserted = true;
+   }
+  }
+  if(inserted == false) {
+   table[hash(key)].push_back(Entry<V>(key,v));
+  }
+ }
 }
 
 template <typename V>
 V Hash<V>::get(string key) {
  int hashed = hash(key);
- if(!table[hashed].empty()) { // If the spot in the table is not empty...
-  typename list< Entry<V> >::iterator it;
-  for(it = table[hashed].begin(); it != table[hashed].end(); it++) {
-   if(it->getKey() == key) // And the key is the same...
-    return it->getValue(); // return the value.
+ if(!table[hashed].empty()) {                                       // If the spot in the table is not empty...
+  typename list< Entry<V> >::iterator it;                             //
+  for(it = table[hashed].begin(); it != table[hashed].end(); it++) {  //
+   std::cout << it->getKey() << std::endl;                            //
+   if(it->getKey() == key)                                          // And the key is the same...
+    return it->getValue();                                          // return the value.
   }
- }  //else the key was not present in the table
+ }                                                                  //else the key was not present in the table
  return 0;
 }
 

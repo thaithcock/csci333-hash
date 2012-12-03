@@ -10,11 +10,19 @@ int main(){
 
  h->insert("one", 1);
 
- std::cout << "inserted (\"one\", 1)" << std::endl;
+ std::cout << "inserted (\"one\", 1)\nresult: " << h->get("one") << std::endl;
 
- std::cout << "result: " << h->get("one") << std::endl;
+ h->insert("one", 2);
+
+ std::cout << "replaced 1 with 2\n" << h->get("one") << std::endl;
+
+ h->insert("noe", 1);
+ 
+ std::cout << "inserted (\"noe\", 3) (should create the same hash as \"one\")\nresult: " << h->get("noe") << std::endl;
 
  h->insert("ZZZZZZzZzZzZzzzZUHcuhu", 239);
- std::cout << h->get("ZZZZZZzZzZzZzzzZUHcuhu") << std::endl;
+
+ std::cout << "inserted (\"ZZZZZZzZzZzZzzzZUHcuhu\", 239)\n" << h->get("ZZZZZZzZzZzZzzzZUHcuhu") << std::endl;
+
  return 0;
 }
