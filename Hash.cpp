@@ -35,6 +35,19 @@ void Hash<V>::insert(string key, V v) {
 }
 
 template <typename V>
+void Hash<V>::remove(string key) {
+ if(table[hash(key)].empty()){} //empty spot, no need to remove
+ else{ //non-empty spot, check for key
+  typename list< Entry<V> >::iterator it;
+  for(it = table[hash(key)].begin(); it != table[hash(key)].end(); it++) {
+    if(it->getKey() == key) {
+     table[hash(key)].erase(it); // Erase it!
+   }
+  }
+ }
+}
+
+template <typename V>
 V Hash<V>::get(string key) {
  int hashed = hash(key);
  if(!table[hashed].empty()) {                                       // If the spot in the table is not empty...
@@ -44,7 +57,7 @@ V Hash<V>::get(string key) {
     return it->getValue();                                          // return the value.
   }
  }                                                                  //else the key was not present in the table
- return 0;
+ return (V)0;
 }
 
 template <typename V>

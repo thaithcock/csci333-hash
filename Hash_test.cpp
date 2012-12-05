@@ -23,6 +23,10 @@ int main(){
  h->insert("ZZZZZZzZzZzZzzzZUHcuhu", 239);
 
  std::cout << "inserted (\"ZZZZZZzZzZzZzzzZUHcuhu\", 239)\n" << h->get("ZZZZZZzZzZzZzzzZUHcuhu") << std::endl;
+ 
+ h->remove("noe");
+
+ std::cout << "removed (\"noe\"\n" << h->get("noe") << std::endl;
 
  return 0;
 }

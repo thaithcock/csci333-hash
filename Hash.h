@@ -17,6 +17,7 @@ class Hash {
   Hash<V>(int size = 32);
   ~Hash();
   void insert(string key, V v);
+  void remove(string key);
   V get(string key);
 };
 
