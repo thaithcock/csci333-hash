@@ -21,12 +21,14 @@ int main(){
  std::cout << "inserted (\"noe\", 3) (should create the same hash as \"one\", but with value of 3)\nresult: " << h->get("noe") << std::endl;
 
  h->insert("ZZZZZZzZzZzZzzzZUHcuhu", 239);
+ h->insert("ZZZZZZzZzZZzzzzZUHcuhu", 13);
 
  std::cout << "inserted (\"ZZZZZZzZzZzZzzzZUHcuhu\", 239)\n" << h->get("ZZZZZZzZzZzZzzzZUHcuhu") << std::endl;
  
  h->remove("noe");
 
- std::cout << "removed (\"noe\"\n" << h->get("noe") << std::endl;
+ std::cout << "removed (\"noe\"\n" << std::endl;
+ h->print();
 
  return 0;
 }

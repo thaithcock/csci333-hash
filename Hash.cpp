@@ -36,12 +36,13 @@ void Hash<V>::insert(string key, V v) {
 
 template <typename V>
 void Hash<V>::remove(string key) {
- if(table[hash(key)].empty()){} //empty spot, no need to remove
- else{ //non-empty spot, check for key
+ if(!table[hash(key)].empty()){ // Non empty spot, no need to remove if empty
+  bool erased = false;
   typename list< Entry<V> >::iterator it;
-  for(it = table[hash(key)].begin(); it != table[hash(key)].end(); it++) {
+  for(it = table[hash(key)].begin(); it != table[hash(key)].end() && erased == false; it++) {
     if(it->getKey() == key) {
-     table[hash(key)].erase(it); // Erase it!
+     it = table[hash(key)].erase(it); // Erase it!
+     erased == true;
    }
   }
  }
@@ -53,6 +54,7 @@ V Hash<V>::get(string key) {
  if(!table[hashed].empty()) {                                       // If the spot in the table is not empty...
   typename list< Entry<V> >::iterator it;                             //
   for(it = table[hashed].begin(); it != table[hashed].end(); it++) {  // it = Entry obj in list
+   std::cout << hashed << std::endl;
    if(it->getKey() == key)                                          // And the key is the same...
     return it->getValue();                                          // return the value.
   }
@@ -68,6 +70,24 @@ int Hash<V>::hash(string key) {
  }
  value = value%height;
  return value;
+}
+
+template <typename V>
+void Hash<V>::print() {
+ std::cout << "[ " ;
+ for(int i = 0; i < height; i++) {
+  std::cout << "{ " ; 
+   if(!table[i].empty()){
+   typename list< Entry<V> >::iterator it;
+   for(it = table[i].begin(); it != table[i].end(); it++) {
+    std::cout << "(" << it->getKey() << ", " << it->getValue() << ") " ;
+   }
+  }
+ std::cout << " }";
+ if(i+1 != height)
+  std::cout << std::endl;
+ }
+ std::cout << " ]" << std::endl;
 }
 
 template class Hash<int>;

@@ -19,6 +19,7 @@ class Hash {
   void insert(string key, V v);
   void remove(string key);
   V get(string key);
+  void print();
 };
 
 #endif
