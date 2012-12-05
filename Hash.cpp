@@ -23,12 +23,12 @@ void Hash<V>::insert(string key, V v) {
   typename list< Entry<V> >::iterator it;
   bool inserted = false;
   for(it = table[hash(key)].begin(); it != table[hash(key)].end() && inserted == false; it++) {
-   if(it->getKey() == key){
+    if(it->getKey() == key) {
     it->setValue(v);
     inserted = true;
    }
   }
-  if(inserted == false) {
+  if(inserted == false) { //non-empty and non-duplicate.
    table[hash(key)].push_back(Entry<V>(key,v));
   }
  }
@@ -39,8 +39,7 @@ V Hash<V>::get(string key) {
  int hashed = hash(key);
  if(!table[hashed].empty()) {                                       // If the spot in the table is not empty...
   typename list< Entry<V> >::iterator it;                             //
-  for(it = table[hashed].begin(); it != table[hashed].end(); it++) {  //
-   std::cout << it->getKey() << std::endl;                            //
+  for(it = table[hashed].begin(); it != table[hashed].end(); it++) {  // it = Entry obj in list
    if(it->getKey() == key)                                          // And the key is the same...
     return it->getValue();                                          // return the value.
   }

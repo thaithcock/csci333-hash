@@ -16,9 +16,9 @@ int main(){
 
  std::cout << "replaced 1 with 2\n" << h->get("one") << std::endl;
 
- h->insert("noe", 1);
+ h->insert("noe", 3);
  
- std::cout << "inserted (\"noe\", 3) (should create the same hash as \"one\")\nresult: " << h->get("noe") << std::endl;
+ std::cout << "inserted (\"noe\", 3) (should create the same hash as \"one\", but with value of 3)\nresult: " << h->get("noe") << std::endl;
 
  h->insert("ZZZZZZzZzZzZzzzZUHcuhu", 239);
 
